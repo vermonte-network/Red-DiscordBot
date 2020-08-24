@@ -393,6 +393,11 @@ class General(commands.Cog):
                 for feature, name in features.items()
                 if feature in guild.features
             ]
+            no_guild_features_list = [
+                f"\N{Cross Mark} {name2}"
+                for feature, name2 in features.items()
+                if feature not in guild.features
+            ]
 
             joined_on = _(
                 "{bot_name} joined this server on {bot_join}. That's over {since_join} days ago!"
@@ -451,8 +456,8 @@ class General(commands.Cog):
                 ),
                 inline=False,
             )
-            if guild_features_list:
-                data.add_field(name=_("Server features:"), value="\n".join(guild_features_list))
+                
+            data.add_field(name=_("Server features:"), value="\n".join(guild_features_list + no_guild_features_list))
             if guild.premium_tier != 0:
                 nitro_boost = _(
                     "Tier {boostlevel} with {nitroboosters} boosters\n"
