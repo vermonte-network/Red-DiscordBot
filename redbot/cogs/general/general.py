@@ -472,6 +472,20 @@ class General(commands.Cog):
                     bitrate=bold(_bitsize(guild.bitrate_limit)),
                 )
                 data.add_field(name=_("Nitro Boost:"), value=nitro_boost)
+            else:
+                nitro_boost = _(
+                    "Tier {boostlevel} with {nitroboosters} boosters\n"
+                    "File size limit: {filelimit}\n"
+                    "Emoji limit: {emojis_limit}\n"
+                    "VCs max bitrate: {bitrate}"
+                ).format(
+                    boostlevel=bold(str(guild.premium_tier)),
+                    nitroboosters=bold(humanize_number(guild.premium_subscription_count)),
+                    filelimit=bold(_size(guild.filesize_limit)),
+                    emojis_limit=bold(str(guild.emoji_limit)),
+                    bitrate=bold(_bitsize(guild.bitrate_limit)),
+                )
+                data.add_field(name=_("Nitro Boost:"), value=nitro_boost)
             if guild.splash:
                 data.set_image(url=guild.splash_url_as(format="png"))
             data.set_footer(text=joined_on)
